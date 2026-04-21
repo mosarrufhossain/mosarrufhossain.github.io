@@ -20,9 +20,6 @@ This is a static multi-page website prepared to mirror the public Google Sites v
 5. Select the `main` branch and `/root` folder.
 6. Save.
 
-Your site will be published automatically.
 
-## Notes
-- I used image placeholders because the original Google Sites image asset URLs are not directly available from the public text extraction.
-- Replace the placeholder panels with your exported images for a closer match.
-- Update the LinkedIn URL in the HTML if needed.
+
+
