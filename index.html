@@ -3,63 +3,1009 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mosarruf Hossain</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Mosarruf H. Shawon — Aerospace PhD Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@200;300;400;500&family=Inconsolata:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #080c14;
+      --surface: #0d1420;
+      --surface2: #111b2e;
+      --border: rgba(56, 139, 253, 0.15);
+      --accent: #3b82f6;
+      --accent2: #60a5fa;
+      --accent-glow: rgba(59, 130, 246, 0.3);
+      --text: #e2eaf6;
+      --text-muted: #7a96b8;
+      --text-dim: #3d5470;
+      --grid-color: rgba(56, 139, 253, 0.04);
+      --red: #ef4444;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Grid background ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Glow orbs ── */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb-1 {
+      width: 600px; height: 600px;
+      background: rgba(59, 130, 246, 0.06);
+      top: -200px; right: -150px;
+    }
+    .orb-2 {
+      width: 400px; height: 400px;
+      background: rgba(96, 165, 250, 0.04);
+      bottom: 20%; left: -100px;
+    }
+
+    /* ── Layout ── */
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 16px 0;
+      background: rgba(8, 12, 20, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo {
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 13px;
+      color: var(--accent2);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a {
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent2); }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+    }
+    .hero-inner { display: grid; grid-template-columns: 1fr auto; gap: 64px; align-items: center; }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 11px;
+      color: var(--accent2);
+      letter-spacing: 0.05em;
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s ease both;
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 7vw, 5.5rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    h1 .accent { color: var(--accent2); }
+    
+    .hero-title-sub {
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      margin-top: 8px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.8;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .hero-links {
+      display: flex; gap: 16px; margin-top: 36px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 24px;
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent2); box-shadow: 0 0 20px var(--accent-glow); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent2); transform: translateY(-1px); }
+
+    /* ── Hero visual (UAS diagram) ── */
+    .hero-visual {
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+    .uas-card {
+      width: 240px; height: 240px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .uas-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(59,130,246,0.07) 0%, transparent 70%);
+    }
+    .uas-card svg { position: relative; z-index: 1; }
+    /* Rotating ring */
+    .ring-outer {
+      animation: spin 12s linear infinite;
+      transform-origin: center;
+    }
+    .ring-inner {
+      animation: spin 8s linear infinite reverse;
+      transform-origin: center;
+    }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    /* Stats row */
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 48px;
+      animation: fadeUp 0.6s 0.5s ease both;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .stat-label {
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Sections ── */
+    section { padding: 96px 0; }
+    .section-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 56px;
+    }
+    .section-tag {
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 4px 10px;
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 4px;
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Research Interests ── */
+    .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .research-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .research-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .research-card:hover { border-color: rgba(59,130,246,0.4); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(59,130,246,0.08); }
+    .research-card:hover::before { opacity: 1; }
+    .research-icon {
+      font-size: 28px; margin-bottom: 14px;
+    }
+    .research-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .research-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── Publications ── */
+    .pub-list { display: flex; flex-direction: column; gap: 20px; }
+    .pub-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      align-items: start;
+      transition: all 0.25s;
+    }
+    .pub-card:hover { border-color: rgba(59,130,246,0.35); transform: translateX(4px); }
+    .pub-year {
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      align-self: center;
+    }
+    .pub-content h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    .pub-authors {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .pub-authors strong { color: var(--text); }
+    .pub-venue {
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 11px;
+      color: var(--accent2);
+    }
+    .pub-award {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 4px 10px;
+      background: rgba(251, 191, 36, 0.08);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      border-radius: 100px;
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 10px;
+      color: #fbbf24;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Education ── */
+    .edu-list { display: flex; flex-direction: column; gap: 0; }
+    .edu-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0 32px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .edu-item:last-child { border-bottom: none; }
+    .edu-item::before {
+      content: '';
+      position: absolute;
+      left: 120px;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+    .edu-item::after {
+      content: '';
+      position: absolute;
+      left: 112px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px; height: 16px;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+    }
+    .edu-period {
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 11px;
+      color: var(--text-dim);
+      padding-top: 4px;
+      text-align: right;
+      padding-right: 32px;
+    }
+    .edu-content { padding-left: 24px; }
+    .edu-degree {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .edu-school {
+      font-size: 14px;
+      color: var(--accent2);
+      margin-bottom: 4px;
+    }
+    .edu-location {
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    .edu-supervisor {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* ── Experience ── */
+    .exp-list { display: flex; flex-direction: column; gap: 16px; }
+    .exp-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+    }
+    .exp-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 16px;
+      flex-wrap: wrap; gap: 8px;
+    }
+    .exp-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+    .exp-org {
+      font-size: 14px;
+      color: var(--accent2);
+      margin-top: 2px;
+    }
+    .exp-period {
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 11px;
+      color: var(--text-dim);
+      background: var(--surface2);
+      padding: 4px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .exp-bullets { list-style: none; padding: 0; }
+    .exp-bullets li {
+      font-size: 14px;
+      color: var(--text-muted);
+      padding: 5px 0 5px 20px;
+      position: relative;
+    }
+    .exp-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    /* ── Skills ── */
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .skill-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .skill-label {
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag {
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 12px;
+      padding: 6px 12px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    .skill-tag:hover { border-color: var(--accent); color: var(--accent2); }
+
+    /* ── Contact ── */
+    #contact {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .contact-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .contact-text p { color: var(--text-muted); font-size: 15px; }
+    .contact-links { display: flex; flex-direction: column; gap: 12px; }
+    .contact-link {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 20px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); transform: translateX(4px); }
+    .contact-link-icon {
+      width: 36px; height: 36px;
+      background: rgba(59,130,246,0.1);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .contact-link-text strong {
+      display: block;
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+    .contact-link-text span {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 32px 0;
+      text-align: center;
+    }
+    footer p {
+      font-family: 'Inconsolata', monospace; font-weight: 300;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .pub-card { grid-template-columns: 1fr; }
+      .pub-year { writing-mode: horizontal-tb; transform: none; }
+      .edu-item { grid-template-columns: 1fr; }
+      .edu-item::before, .edu-item::after { display: none; }
+      .edu-period { text-align: left; padding-right: 0; padding-bottom: 4px; }
+      .edu-content { padding-left: 0; }
+      .nav-links { display: none; }
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <nav class="nav">
-      <a class="brand" href="index.html">Mosarruf Hossain</a>
+
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container">
+      <a href="#" class="nav-logo">MHS // AEROSPACE</a>
       <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About Me</a>
-        <a href="education.html">Education</a>
-        <a href="research.html">Research &amp; Publication</a>
-        <a href="activities.html">Activities</a>
-        <a href="blog.html">Blog</a>
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
       </div>
-    </nav>
-  </header>
+    </div>
+  </nav>
 
-  <main class="container">
-    <section class="hero">
-      <div class="hero-card">
-        <div class="kicker">Thanks for stopping by!</div>
-        <h1>Mosarruf Hossain Shawon</h1>
-        <p class="lead">A mission-driven aerospace researcher who thrives in building systems, mentoring people, and advancing UAS technology for real-world environmental impact.</p>
-        <p>Welcome! I am Mosarruf Hossain. A driven Ph.D. student of Aerospace Engineering specializing in the application of sensing, estimation, and control with Unmanned Aircraft Systems (UAS) at the University of Kansas. With a Master's degree in Aerospace Engineering from the University of Kansas, my expertise spans wind/gust/wake sensing and estimation, system identification of UAS, UAS system and flight control design, and control engineering.</p>
-        <p>If you have any questions or comments, please feel free to contact me at hossainmosarruf (at) gmail (dot) com.</p>
-        <div class="button-row">
-          <a class="btn" href="research.html">Research &amp; Publication</a>
-          <a class="btn secondary" href="education.html">Education</a>
-          <a class="btn secondary" href="about.html">About Me</a>
-          <a class="btn secondary" href="https://drive.google.com" target="_blank" rel="noreferrer">CV of Mosarruf Hossain</a>
-          <a class="btn secondary" href="https://scholar.google.com" target="_blank" rel="noreferrer">Google Scholar</a>
-          <a class="btn secondary" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
-        </div>
-      </div>
-      <div class="portrait">
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
         <div>
-          <strong>Profile image placeholder</strong><br />
-          Export the main portrait from Google Sites and place it here for an exact match.
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            PhD Candidate · University of Kansas
+          </div>
+          <h1>Mosarruf<br/>H. <span class="accent">Shawon</span></h1>
+          <p class="hero-title-sub">Aerospace Engineering · Wind Sensing · UAS Research</p>
+          <p class="hero-desc">
+            Developing next-generation unmanned aircraft systems for atmospheric sensing — 
+            estimating wind fields, fire plumes, and wake vortices to push the boundaries of 
+            autonomous flight safety and environmental monitoring.
+          </p>
+          <div class="hero-links">
+            <a href="mailto:mosarruf@ku.edu" class="btn btn-primary">📧 Get in Touch</a>
+            <a href="https://linkedin.com/in/mosarruf-shawon" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <div class="stat-num">3</div>
+              <div class="stat-label">Publications</div>
+            </div>
+            <div>
+              <div class="stat-num">4+</div>
+              <div class="stat-label">Years Research</div>
+            </div>
+            <div>
+              <div class="stat-num">🏆</div>
+              <div class="stat-label">Best Paper Award</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- UAS Visual -->
+        <div class="hero-visual">
+          <div class="uas-card">
+            <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Outer ring dashed -->
+              <g class="ring-outer">
+                <circle cx="100" cy="100" r="88" stroke="rgba(59,130,246,0.2)" stroke-width="1" stroke-dasharray="4 6"/>
+              </g>
+              <!-- Inner ring -->
+              <g class="ring-inner">
+                <circle cx="100" cy="100" r="66" stroke="rgba(59,130,246,0.15)" stroke-width="1" stroke-dasharray="2 8"/>
+                <!-- tick marks -->
+                <line x1="100" y1="34" x2="100" y2="42" stroke="rgba(59,130,246,0.5)" stroke-width="1.5"/>
+                <line x1="100" y1="158" x2="100" y2="166" stroke="rgba(59,130,246,0.5)" stroke-width="1.5"/>
+                <line x1="34" y1="100" x2="42" y2="100" stroke="rgba(59,130,246,0.5)" stroke-width="1.5"/>
+                <line x1="158" y1="100" x2="166" y2="100" stroke="rgba(59,130,246,0.5)" stroke-width="1.5"/>
+              </g>
+              <!-- Cross hairs -->
+              <line x1="100" y1="10" x2="100" y2="190" stroke="rgba(59,130,246,0.08)" stroke-width="1"/>
+              <line x1="10" y1="100" x2="190" y2="100" stroke="rgba(59,130,246,0.08)" stroke-width="1"/>
+              <!-- UAS body (flying wing) -->
+              <g transform="translate(100,100)">
+                <!-- Main wing -->
+                <path d="M0,-8 C20,-5 55,0 65,10 L55,12 C45,5 20,2 0,1 C-20,2 -45,5 -55,12 L-65,10 C-55,0 -20,-5 0,-8Z" fill="#3b82f6" opacity="0.85"/>
+                <!-- Fuselage -->
+                <ellipse cx="0" cy="2" rx="8" ry="4" fill="#60a5fa"/>
+                <!-- Nose -->
+                <path d="M0,-12 L5,-2 L-5,-2 Z" fill="#93c5fd"/>
+                <!-- Winglets -->
+                <rect x="62" y="8" width="6" height="2" rx="1" fill="#3b82f6" opacity="0.7"/>
+                <rect x="-68" y="8" width="6" height="2" rx="1" fill="#3b82f6" opacity="0.7"/>
+                <!-- Propellers (4) -->
+                <circle cx="48" cy="-4" r="10" stroke="rgba(147,197,253,0.25)" stroke-width="1" fill="none"/>
+                <line x1="48" y1="-14" x2="48" y2="6" stroke="rgba(147,197,253,0.5)" stroke-width="1.5"/>
+                <line x1="38" y1="-4" x2="58" y2="-4" stroke="rgba(147,197,253,0.5)" stroke-width="1.5"/>
+                <circle cx="-48" cy="-4" r="10" stroke="rgba(147,197,253,0.25)" stroke-width="1" fill="none"/>
+                <line x1="-48" y1="-14" x2="-48" y2="6" stroke="rgba(147,197,253,0.5)" stroke-width="1.5"/>
+                <line x1="-58" y1="-4" x2="-38" y2="-4" stroke="rgba(147,197,253,0.5)" stroke-width="1.5"/>
+              </g>
+              <!-- Wind field vectors -->
+              <g opacity="0.35">
+                <line x1="20" y1="130" x2="36" y2="126" stroke="#60a5fa" stroke-width="1"/>
+                <polygon points="36,126 30,122 33,129" fill="#60a5fa"/>
+                <line x1="20" y1="150" x2="38" y2="144" stroke="#60a5fa" stroke-width="1"/>
+                <polygon points="38,144 31,141 35,148" fill="#60a5fa"/>
+                <line x1="20" y1="170" x2="40" y2="162" stroke="#60a5fa" stroke-width="1"/>
+                <polygon points="40,162 33,159 37,166" fill="#60a5fa"/>
+                <line x1="160" y1="130" x2="176" y2="124" stroke="#60a5fa" stroke-width="1"/>
+                <polygon points="176,124 170,121 173,128" fill="#60a5fa"/>
+                <line x1="160" y1="150" x2="178" y2="142" stroke="#60a5fa" stroke-width="1"/>
+                <polygon points="178,142 171,140 175,147" fill="#60a5fa"/>
+              </g>
+              <!-- Center dot glow -->
+              <circle cx="100" cy="100" r="4" fill="#3b82f6"/>
+              <circle cx="100" cy="100" r="8" fill="rgba(59,130,246,0.2)"/>
+            </svg>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section card">
-      <h2>News</h2>
-      <ul class="list-clean news-list">
-        <li><strong>03 Apr 2026</strong> Presented a poster on “Sensing and Estimation of Fire-Induced Wind Field using Small UAS” in the KU GEA Research Showcase. The poster was awarded 2nd Place in the Graduate Poster Presentation Category.</li>
-        <li><strong>15 Jan 2026</strong> Presented work on “Sensing and Estimation of Fire-Induced Wind Field using Small UAS” in the Atmospheric Flight Mechanics: System Identification II session in SciTech’26. Selected as one of the top three Best Student Papers by the AIAA Atmospheric Flight Mechanics Technical Committee.</li>
-        <li><strong>25 Aug 2025</strong> The paper “Sensing and Estimation of Fire-Induced Wind Field using Small UAS” was selected for SciTech’26 presentation.</li>
-        <li><strong>10 Mar 2025</strong> The paper “System Identification for Small Flying-wing UAS Using Open-loop and Closed-loop Flight Data” by Justin Matt, Haiyang Chao, Mosarruf H. Shawon, Benjamin C. Svoboda, and Steven G. Hagerott was published in <em>AIAA Journal of Aircraft</em>.</li>
-      </ul>
-    </section>
-  </main>
+  <!-- RESEARCH INTERESTS -->
+  <section id="research">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">01</span>
+        <h2>Research Interests</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="research-grid">
+        <div class="research-card reveal">
+          <div class="research-icon">🌪️</div>
+          <h3>Wind & Gust Sensing</h3>
+          <p>Developing methods to sense and estimate atmospheric wind fields, gusts, and turbulence using onboard UAS sensors and state estimation algorithms.</p>
+        </div>
+        <div class="research-card reveal">
+          <div class="research-icon">🔥</div>
+          <h3>Fire-Induced Wind Estimation</h3>
+          <p>Investigating fire plume dynamics and estimating fire-induced vertical wind velocities during UAS fire plume encounters using stochastic filters.</p>
+        </div>
+        <div class="research-card reveal">
+          <div class="research-icon">✈️</div>
+          <h3>Wake Vortex Research</h3>
+          <p>Formulating optimal wake-parameter identification methods and extending flight-dynamics simulations for UAS response to wake vortices.</p>
+        </div>
+        <div class="research-card reveal">
+          <div class="research-icon">🛰️</div>
+          <h3>UAS System Identification</h3>
+          <p>Identifying servo, actuator, and full-system dynamics for small and micro UAS using open-loop and closed-loop flight data to support control design.</p>
+        </div>
+        <div class="research-card reveal">
+          <div class="research-icon">🔬</div>
+          <h3>Small/Micro UAS Development</h3>
+          <p>Designing and testing small fixed-wing and flying-wing UAS platforms, including end-to-end flight test campaigns with full safety review protocols.</p>
+        </div>
+        <div class="research-card reveal">
+          <div class="research-icon">📊</div>
+          <h3>Stochastic Filtering</h3>
+          <p>Building and validating probabilistic estimation frameworks for real-time inference of flow angles and atmospheric states during UAS flight.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <footer class="footer">
-    <div class="footer-inner">hossainmosarruf (at) gmail.com © 2025 Mosarruf Hossain</div>
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">02</span>
+        <h2>Publications</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="pub-list">
+
+        <div class="pub-card reveal">
+          <div class="pub-year">2026</div>
+          <div class="pub-content">
+            <h3>Sensing and Estimation of Fire-Induced Wind Field using Small UAS</h3>
+            <p class="pub-authors"><strong>Mosarruf H. Shawon</strong>, Matthew Rhudy, Justin J. Matt, Huixuan Wu, and Haiyang Chao</p>
+            <p class="pub-venue">AIAA Science & Technology Forum & Exposition, 2026</p>
+            <div>
+              <span class="pub-award">🏆 Top 3 Best Student Papers — AIAA Atmospheric Flight Mechanics TC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card reveal">
+          <div class="pub-year">2025</div>
+          <div class="pub-content">
+            <h3>Vertical Wind Velocity Estimation during UAS Fire Plume Encounters</h3>
+            <p class="pub-authors"><strong>Mosarruf H. Shawon</strong>, Haiyang Chao, Matthew Rhudy, Tor Arne Johansen, Harold Patrick Flanagan, Pengzhi Tian, and Jacksen Goyer</p>
+            <p class="pub-venue">AIAA Science & Technology Forum & Exposition, 2025</p>
+          </div>
+        </div>
+
+        <div class="pub-card reveal">
+          <div class="pub-year">2025</div>
+          <div class="pub-content">
+            <h3>System Identification for Small Flying-wing UAS Using Open-loop and Closed-loop Flight Data</h3>
+            <p class="pub-authors">Justin J. Matt, Haiyang Chao, <strong>Mosarruf H. Shawon</strong>, Benjamin C. Svoboda, and Steven G. Hagerott</p>
+            <p class="pub-venue">AIAA Journal of Aircraft — Accepted, 2025</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">03</span>
+        <h2>Education</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="edu-list">
+        <div class="edu-item reveal">
+          <div class="edu-period">Aug 2021<br/>Present</div>
+          <div class="edu-content">
+            <div class="edu-degree">PhD in Aerospace Engineering</div>
+            <div class="edu-school">University of Kansas</div>
+            <div class="edu-location">Lawrence, KS, USA</div>
+            <div class="edu-supervisor">Supervisor: Dr. Haiyang Chao · Cooperative Unmanned Systems Laboratory</div>
+          </div>
+        </div>
+        <div class="edu-item reveal">
+          <div class="edu-period">Aug 2021<br/>Dec 2025</div>
+          <div class="edu-content">
+            <div class="edu-degree">Master of Engineering in Aerospace Engineering</div>
+            <div class="edu-school">University of Kansas</div>
+            <div class="edu-location">Lawrence, KS, USA</div>
+          </div>
+        </div>
+        <div class="edu-item reveal">
+          <div class="edu-period">Feb 2014<br/>Jan 2018</div>
+          <div class="edu-content">
+            <div class="edu-degree">B.Sc. in Aeronautical Engineering</div>
+            <div class="edu-school">Military Institute of Science and Technology</div>
+            <div class="edu-location">Dhaka, Bangladesh</div>
+            <div class="edu-supervisor">Major in Aerospace · Supervisor: Dr. M. A. Taher Ali</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">04</span>
+        <h2>Experience</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="exp-list">
+
+        <div class="exp-card reveal">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Graduate Research Assistant</div>
+              <div class="exp-org">Cooperative Unmanned Systems Laboratory (CUSL) · University of Kansas</div>
+            </div>
+            <div class="exp-period">Aug 2021 – Present</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Led fixed-wing UAS flight-test campaigns including test planning, safety reviews, and on-site execution.</li>
+            <li>Developed stochastic filters to estimate flow angles and vertical wind during UAS wake-vortex and fire-plume encounters.</li>
+            <li>Formulated an optimal wake-parameter identification method for post-flight analysis and model calibration.</li>
+            <li>Extended HawkWakeSim v2.1-VLM (MATLAB) flight-dynamics simulation for UAS response to wake vortices.</li>
+            <li>Identified servo/actuator dynamics for UAS control-surface modeling and control design.</li>
+          </ul>
+        </div>
+
+        <div class="exp-card reveal">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Graduate Teaching Assistant — AE 551: Dynamics of Flight II</div>
+              <div class="exp-org">Department of Aerospace Engineering · University of Kansas</div>
+            </div>
+            <div class="exp-period">Spring 2022 & 2024</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Assisted instruction in aircraft dynamic modeling and control analysis.</li>
+            <li>Topics: state-space representation, dynamic stability, classical flight modes, transfer-function analysis, and flight control system design.</li>
+          </ul>
+        </div>
+
+        <div class="exp-card reveal">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Graduate Teaching Assistant — AE 430: Aerospace Instrumentation Lab</div>
+              <div class="exp-org">Department of Aerospace Engineering · University of Kansas</div>
+            </div>
+            <div class="exp-period">Spring 2021</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Supported hands-on lab instruction covering pressure probes, thermocouples, strain gauges, hot-wire anemometry, LDV, and flow visualization.</li>
+            <li>Utilized LabVIEW for data acquisition and MATLAB for post-processing; conducted and evaluated lab sessions.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">05</span>
+        <h2>Skills & Languages</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-block reveal">
+          <div class="skill-label">Programming</div>
+          <div class="skill-tags">
+            <span class="skill-tag">MATLAB</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">C</span>
+            <span class="skill-tag">C++</span>
+          </div>
+        </div>
+        <div class="skill-block reveal">
+          <div class="skill-label">Tools & Domains</div>
+          <div class="skill-tags">
+            <span class="skill-tag">LabVIEW</span>
+            <span class="skill-tag">Flight Simulation</span>
+            <span class="skill-tag">State Estimation</span>
+            <span class="skill-tag">UAS Testing</span>
+          </div>
+        </div>
+        <div class="skill-block reveal">
+          <div class="skill-label">Languages</div>
+          <div class="skill-tags">
+            <span class="skill-tag">English (Advanced)</span>
+            <span class="skill-tag">Bengali (Native)</span>
+          </div>
+        </div>
+        <div class="skill-block reveal">
+          <div class="skill-label">Research Methods</div>
+          <div class="skill-tags">
+            <span class="skill-tag">System Identification</span>
+            <span class="skill-tag">Stochastic Filtering</span>
+            <span class="skill-tag">Flight Testing</span>
+            <span class="skill-tag">VLM Simulation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-text reveal">
+          <h2>Let's Connect</h2>
+          <p>Interested in UAS research, wind sensing, or potential collaboration? 
+          I'm always happy to discuss research, opportunities, and ideas.</p>
+        </div>
+        <div class="contact-links reveal">
+          <a href="mailto:mosarruf@ku.edu" class="contact-link">
+            <div class="contact-link-icon">📧</div>
+            <div class="contact-link-text">
+              <strong>Email</strong>
+              <span>mosarruf@ku.edu</span>
+            </div>
+          </a>
+          <a href="tel:7856916209" class="contact-link">
+            <div class="contact-link-icon">📞</div>
+            <div class="contact-link-text">
+              <strong>Phone</strong>
+              <span>(785) 691-6209</span>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/mosarruf-shawon" target="_blank" class="contact-link">
+            <div class="contact-link-icon">🔗</div>
+            <div class="contact-link-text">
+              <strong>LinkedIn</strong>
+              <span>mosarruf-shawon</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2026 Mosarruf H. Shawon · Cooperative Unmanned Systems Laboratory · University of Kansas</p>
+    </div>
   </footer>
-  <script src="script.js"></script>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          // stagger children if multiple reveals in same parent
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = (i % 4) * 0.07 + 's';
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
