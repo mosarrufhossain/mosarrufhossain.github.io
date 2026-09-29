@@ -56,25 +56,6 @@ section[id] { scroll-margin-top: 84px; }
 .pub-list.compact .pub { padding: 16px 0; }
 .pub-list.compact .pub-title { font-size: 1.08rem; }
 
-/* --- Identity block: name/bio on the left, circular portrait top-right --- */
-.identity {
-  display: flex; justify-content: space-between; align-items: flex-start; gap: 32px;
-  padding-top: clamp(28px, 5vw, 52px);
-}
-.identity-text { flex: 1; min-width: 0; }
-.identity-photo { flex: none; }
-.identity-photo img {
-  width: 168px; height: 168px; border-radius: 50%; object-fit: cover;
-  border: 4px solid var(--surface);
-  box-shadow: 0 0 0 1px var(--rule), var(--shadow);
-}
-@media (max-width: 700px) {
-  .identity { flex-direction: column; align-items: center; text-align: center; gap: 18px; }
-  .identity-photo { order: -1; }
-  .identity-photo img { width: 128px; height: 128px; }
-  .identity .quicklinks { justify-content: center; }
-}
-
 @media (max-width: 640px) {
   .dropdown-panel { right: 12px; left: 12px; min-width: 0; }
 }
